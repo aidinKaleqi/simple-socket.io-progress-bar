@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socket.io Progress Bar</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #progress-container {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+
+        #progress-bar {
+            height: 30px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            width: 0;
+            transition: width 0.3s ease-in-out;
+        }
+    </style>
 </head>
 <body>
-<h1>Progress Bar</h1>
+<h1>Socket.io Progress Bar</h1>
 <div id="progress-container">
     <div id="progress-bar"></div>
 </div>
