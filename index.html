@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Progress Bar</title>
+</head>
+<body>
+<h1>Progress Bar</h1>
+<div id="progress-container">
+    <div id="progress-bar"></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on('progress', (progress) => {
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = `${progress}%`;
+    progressBar.innerText = `${progress}%`;
+  });
+</script>
+</body>
+</html>
