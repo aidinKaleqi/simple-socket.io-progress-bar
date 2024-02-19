@@ -4,50 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socket.io Progress Bar</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        #progress-container {
-            width: 300px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 20px auto;
-        }
-
-        #progress-bar {
-            height: 30px;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            line-height: 30px;
-            width: 0;
-            transition: width 0.3s ease-in-out;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Socket.io Progress Bar</h1>
+<h1></h1>
+<div id="loader">
+    <div id="lemon"></div>
+    <div id="straw"></div>
+    <div id="glass">
+        <div id="cubes">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="drink"></div>
+        <span id="counter"></span>
+    </div>
+    <div id="coaster"></div>
+</div>
+
+<footer>Please wait while<br>we fill up your glass...</footer>
+
 <div id="progress-container">
     <div id="progress-bar"></div>
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js" data-done="100"></script>
 <script>
   const socket = io();
 
   socket.on('progress', (progress) => {
-    const progressBar = document.getElementById('progress-bar');
-    progressBar.style.width = `${progress}%`;
-    progressBar.innerText = `${progress}%`;
+    const straw = document.getElementById('straw');
+    const lemon = document.getElementById('lemon');
+    if(progress >= 94) {
+      lemon.style.display = 'inline';
+      straw.style.display = 'inline';
+    }
+    if(progress >= 100 ) {
+      straw.style.display = 'none';
+      lemon.style.display = 'none';
+    }
+    const counter = document.getElementById('counter');
+    counter.innerText = `${progress}%`;
+    const drink = document.getElementById('drink');
+    drink.style.top = (100-progress*.9)+'%';
   });
 </script>
 </body>

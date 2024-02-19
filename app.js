@@ -19,15 +19,21 @@ io.on('connection', (socket) => {
   // Emit initial progress value when a new client connects
   socket.emit('progress', progress);
 
-  // Simulate a task that increments the progress and emits it to all clients
-  const taskInterval = setInterval(() => {
+  function startPouring() {
     if (progress < 100) {
-      progress += 1;
-      io.emit('progress', progress); // Broadcast progress to all connected clients
+      progress += Math.floor(Math.random() * 6);
+
+      if(progress > 100 ) progress += 100 - progress;
+      io.emit('progress', progress);
     } else {
       clearInterval(taskInterval);
     }
-  }, 1000);
+    if(progress == 100) progress = 0;
+  }
+
+  const taskInterval = setInterval(() => {
+    startPouring();
+  }, 500);
 
   // Handle disconnect event
   socket.on('disconnect', () => {
